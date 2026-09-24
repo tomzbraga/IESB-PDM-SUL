@@ -1,0 +1,32 @@
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Testes
+coverage/
+
+# macOS
+.DS_Store
+
+# Logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# Editor
+.vscode/
+.idea/
+
+# Native (só relevante se você rodar `expo prebuild`)
+ios/
+android/
