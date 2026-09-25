@@ -1,13 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
+import DespesasRecentes from './screens/DespesasRecentes';
+import GerenciarDespesa from './screens/GerenciarDespesa';
+import TodasDespesas from './screens/TodasDespesas';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
+  
+  const Tab = createBottomTabNavigator();
+
+  function BottomTabScreen() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="DespesasRecentes" component={DespesasRecentes} />
+        <Tab.Screen name="TodasDespesas" component={TodasDespesas} />
+      </Tab.Navigator>
+    )
+  }
+
+  const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Despesas" component={BottomTabScreen} />
+        <Stack.Screen name="GerenciarDespesa" component={GerenciarDespesa} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
