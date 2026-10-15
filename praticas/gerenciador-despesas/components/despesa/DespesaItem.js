@@ -12,6 +12,9 @@ export default function DespesaItem({ item }) {
       <View style={styles.itemContainer}>
         <View style={styles.itemText}>
           <Text>{getDataFormatada(item.data)}</Text>
+          <View style={styles.categoria}>
+            <Text style={styles.categoriaTexto}>{item.categoria}</Text>
+          </View>
         </View>
         <View style={styles.itemText}>
           <Text>{item.descricao}</Text>
@@ -39,5 +42,16 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     marginHorizontal: 2,
     alignContent: "left",
+  },
+  categoria: {
+    alignSelf: "flex-start",
+    backgroundColor: "#f2f2f2",
+    borderRadius: 10,
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    marginTop: 4,
+  },
+  categoriaTexto: {
+    fontSize: 11,
   },
 });

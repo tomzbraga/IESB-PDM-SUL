@@ -10,7 +10,9 @@ export default function DespesaSumario({ despesas, periodo }) {
         <Text>{periodo}</Text>
       </View>
       <View style={styles.itemText}></View>
-      <Text>R$ {somaDespesas.toFixed(2)}</Text>
+      <Text style={somaDespesas > 200 && styles.valorAlto}>
+        R$ {somaDespesas.toFixed(2)}
+      </Text>
     </View>
   );
 }
@@ -30,5 +32,8 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     marginHorizontal: 2,
     alignContent: "left",
+  },
+  valorAlto: {
+    color: "red",
   },
 });

@@ -18,12 +18,14 @@ export default function DespesasRecentes() {
       id: "1",
       descricao: "Conta de luz",
       valor: 100.99,
+      categoria: "Contas",
       data: new Date(2026, 9, 12),
     },
     {
       id: "2",
       descricao: "Conta de agua",
       valor: 40.99,
+      categoria: "Contas",
       data: new Date(2026, 7, 9),
     },
   ];
