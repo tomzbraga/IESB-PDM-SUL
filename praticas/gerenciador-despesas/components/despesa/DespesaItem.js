@@ -24,4 +24,20 @@ export default function DespesaItem({ item }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  itemContainer: {
+    flex: 1,
+    padding: 5,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    backgroundColor: "lightgray",
+    flexDirection: "row",
+  },
+  itemText: {
+    flex: 1,
+    padding: 2,
+    marginVertical: 2,
+    marginHorizontal: 2,
+    alignContent: "left",
+  },
+});

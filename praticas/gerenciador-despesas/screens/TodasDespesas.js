@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import DespesaSaida from "../components/despesa/DespesaSaida";
 
@@ -17,5 +17,10 @@ export default function TodasDespesas() {
       data: new Date(2025, 4, 10),
     },
   ];
-  return <DespesaSaida despesas={DUMMY_DESPESAS} periodo={"Total"} />;
+
+  return (
+    <View>
+      <DespesaSaida despesas={DUMMY_DESPESAS} periodo={"Total"} />
+    </View>
+  );
 }
