@@ -13,7 +13,7 @@ export default function IconButton({
       onPress={onPress}
       style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
     >
-      <Ionicons name={icon} size={size} color={color} />
+      <Ionicons name={icon} size={size} color={color} style={{ padding: 10 }} />
     </Pressable>
   );
 }
