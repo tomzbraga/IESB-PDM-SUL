@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import DespesaSaida from "../components/expense/DespesaSaida";
+import DespesaSaida from "../components/despesa/DespesaSaida";
 
 export default function DespesasRecentes() {
   function filterLast7Days(expenses) {

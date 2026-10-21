@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 
-import DespesaSaida from "../components/expense/DespesaSaida";
+import DespesaSaida from "../components/despesa/DespesaSaida";
 
 const CATEGORIES = ["Alimentação", "Transporte", "Lazer", "Contas"];
 
