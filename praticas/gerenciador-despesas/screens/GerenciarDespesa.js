@@ -2,36 +2,36 @@ import { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const CATEGORIAS = ["Alimentação", "Transporte", "Lazer", "Contas"];
+const CATEGORIES = ["Alimentação", "Transporte", "Lazer", "Contas"];
 
 export default function GerenciarDespesa({ navigation }) {
-  const [descricao, setDescricao] = useState("");
-  const [valor, setValor] = useState("");
-  const [data, setData] = useState(new Date());
-  const [categoria, setCategoria] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [data, setDate] = useState(new Date());
+  const [category, setCategory] = useState("");
 
   const [showPicker, setShowPicker] = useState(false);
   const onChange = (e, selectedDate) => {
     const currentDate = selectedDate || data;
     setShowPicker(false);
-    setData(currentDate);
+    setDate(currentDate);
   };
 
-  const handleChangeValor = (text) => {
+  const handleChangePrice = (text) => {
     const cleanText = text.replace(",", ".");
 
     const match = cleanText.match(/^\d*\.?\d{0,2}$/);
 
     if (match) {
-      setValor(cleanText);
+      setPrice(cleanText);
     }
   };
 
-  const formularioValido =
-    descricao.trim() !== "" && Number(valor) > 0 && categoria !== "";
+  const validForm =
+    description.trim() !== "" && Number(price) > 0 && category !== "";
 
-  const handleSalvar = () => {
-    if (!formularioValido) {
+  const handleSave = () => {
+    if (!validForm) {
       return;
     }
     navigation.goBack();
@@ -44,8 +44,8 @@ export default function GerenciarDespesa({ navigation }) {
         <TextInput
           style={styles.input}
           maxLength={20}
-          value={descricao}
-          onChangeText={setDescricao}
+          value={description}
+          onChangeText={setDescription}
         ></TextInput>
       </View>
       <View style={styles.inputContainer}>
@@ -54,24 +54,24 @@ export default function GerenciarDespesa({ navigation }) {
           style={styles.input}
           keyboardType="decimal-pad"
           maxLength={10}
-          value={valor}
-          onChangeText={handleChangeValor}
+          value={price}
+          onChangeText={handleChangePrice}
         ></TextInput>
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Categoria</Text>
-        <View style={styles.categorias}>
-          {CATEGORIAS.map((item) => (
+        <View style={styles.categories}>
+          {CATEGORIES.map((item) => (
             <Pressable
               key={item}
-              onPress={() => setCategoria(item)}
+              onPress={() => setCategory(item)}
               style={[
-                styles.categoria,
-                categoria === item && styles.categoriaSelecionada,
+                styles.category,
+                category === item && styles.selectedCategory,
               ]}
             >
               <Text
-                style={[categoria === item && styles.categoriaTextoSelecionado]}
+                style={[category === item && styles.selectedTextCategory]}
               >
                 {item}
               </Text>
@@ -94,11 +94,11 @@ export default function GerenciarDespesa({ navigation }) {
         )}
       </View>
       <Pressable
-        onPress={handleSalvar}
-        disabled={!formularioValido}
-        style={[styles.botao, !formularioValido && styles.botaoDesabilitado]}
+        onPress={handleSave}
+        disabled={!validForm}
+        style={[styles.button, !validForm && styles.unabledButton]}
       >
-        <Text style={styles.botaoTexto}>Salvar</Text>
+        <Text style={styles.textButton}>Salvar</Text>
       </Pressable>
     </View>
   );
@@ -122,36 +122,36 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     padding: 8,
   },
-  categorias: {
+  categories: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
   },
-  categoria: {
+  category: {
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 16,
     paddingVertical: 6,
     paddingHorizontal: 12,
   },
-  categoriaSelecionada: {
+  selectedCategory: {
     backgroundColor: "#3f51b5",
     borderColor: "#3f51b5",
   },
-  categoriaTextoSelecionado: {
+  selectedTextCategory: {
     color: "white",
   },
-  botao: {
+  button: {
     backgroundColor: "#3f51b5",
     padding: 12,
     alignItems: "center",
     marginHorizontal: 4,
     marginTop: 8,
   },
-  botaoDesabilitado: {
+  unabledButton: {
     opacity: 0.4,
   },
-  botaoTexto: {
+  textButton: {
     color: "white",
     fontWeight: "bold",
   },

@@ -1,8 +1,8 @@
 import { Text, View, Pressable, StyleSheet } from "react-native";
 
-function getDataFormatada(data) {
+function getFormatedDate(date) {
   return (
-    data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear()
+    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
   );
 }
 
@@ -11,16 +11,16 @@ export default function DespesaItem({ item }) {
     <Pressable>
       <View style={styles.itemContainer}>
         <View style={styles.itemText}>
-          <Text>{getDataFormatada(item.data)}</Text>
-          <View style={styles.categoria}>
-            <Text style={styles.categoriaTexto}>{item.categoria}</Text>
+          <Text>{getFormatedDate(item.date)}</Text>
+          <View style={styles.category}>
+            <Text style={styles.textCategory}>{item.category}</Text>
           </View>
         </View>
         <View style={styles.itemText}>
-          <Text>{item.descricao}</Text>
+          <Text>{item.description}</Text>
         </View>
         <View style={styles.itemText}>
-          <Text>{item.valor}</Text>
+          <Text>{item.price}</Text>
         </View>
       </View>
     </Pressable>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     alignContent: "left",
   },
-  categoria: {
+  category: {
     alignSelf: "flex-start",
     backgroundColor: "#f2f2f2",
     borderRadius: 10,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     marginTop: 4,
   },
-  categoriaTexto: {
+  textCategory: {
     fontSize: 11,
   },
 });

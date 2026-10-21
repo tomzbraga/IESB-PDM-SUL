@@ -3,15 +3,15 @@ import { Text, View, StyleSheet } from "react-native";
 import DespesaSumario from "./DespesaSumario";
 import DespesaLista from "./DespesaLista";
 
-//Interessante o que eu percebi: quando criamos um componente (<DespesaSumario /> por exemplo), podemos criar "atributos personalizados" como "despesas"
+//Interessante o que eu percebi: quando criamos um componente (<DespesaSumario /> por exemplo), podemos criar "atributos personalizados" como "expenses"
 //que nada mais é do que a props que tem dentro do próprio componente, ou seja, o componente "pede" uma props e você passa.
-//Porém tenho uma dúvida: igualar os nomes é adequado? Ainda me é estranho colocar despesas={despesas}, por mais que eu entenda, ainda levo um tempo para raciocinar.
+//Porém tenho uma dúvida: igualar os nomes é adequado? Ainda me é estranho colocar expenses={expenses}, por mais que eu entenda, ainda levo um tempo para raciocinar.
 
-export default function DespesaSaida({ despesas, periodo }) {
+export default function DespesaSaida({ expenses, period }) {
   return (
     <View>
-      <DespesaSumario despesas={despesas} periodo={periodo} />
-      <DespesaLista despesas={despesas} />
+      <DespesaSumario expenses={expenses} period={period} />
+      <DespesaLista expenses={expenses} />
     </View>
   );
 }

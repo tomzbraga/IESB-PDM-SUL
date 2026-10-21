@@ -1,38 +1,38 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import DespesaSaida from "../components/despesa/DespesaSaida";
+import DespesaSaida from "../components/expense/DespesaSaida";
 
 export default function DespesasRecentes() {
-  function filtrarUltimos7Dias(despesas) {
-    const hoje = new Date();
-    const seteDiasAtras = new Date();
-    seteDiasAtras.setDate(hoje.getDate() - 7);
+  function filterLast7Days(expenses) {
+    const today = new Date();
+    const lastSevenDays = new Date();
+    lastSevenDays.setDate(today.getDate() - 7);
 
-    return despesas.filter((despesa) => {
-      return despesa.data >= seteDiasAtras && despesa.data <= hoje;
+    return expenses.filter((expense) => {
+      return expense.date >= lastSevenDays && expense.date <= today;
     });
   }
 
-  const DUMMY_DESPESAS = [
+  const DUMMY_EXPENSES = [
     {
       id: "1",
-      descricao: "Conta de luz",
-      valor: 100.99,
-      categoria: "Contas",
-      data: new Date(2026, 9, 12),
+      description: "Conta de luz",
+      price: 100.99,
+      category: "Contas",
+      date: new Date(2026, 9, 12),
     },
     {
       id: "2",
-      descricao: "Conta de agua",
-      valor: 40.99,
-      categoria: "Contas",
-      data: new Date(2026, 7, 9),
+      description: "Conta de agua",
+      price: 40.99,
+      category: "Contas",
+      date: new Date(2026, 7, 9),
     },
   ];
   return (
     <DespesaSaida
-      despesas={filtrarUltimos7Dias(DUMMY_DESPESAS)}
-      periodo={"Últimos 7 dias"}
+      expenses={filterLast7Days(DUMMY_EXPENSES)}
+      period={"Últimos 7 dias"}
     />
   );
 }

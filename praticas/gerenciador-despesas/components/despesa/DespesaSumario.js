@@ -1,17 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function DespesaSumario({ despesas, periodo }) {
-  const somaDespesas = despesas.reduce((total, despesa) => {
-    return total + despesa.valor;
+export default function DespesaSumario({ expenses, period }) {
+  const sumExpenses = expenses.reduce((total, expense) => {
+    return total + expense.price;
   }, 0);
   return (
     <View style={styles.itemContainer}>
       <View style={styles.itemText}>
-        <Text>{periodo}</Text>
+        <Text>{period}</Text>
       </View>
       <View style={styles.itemText}></View>
-      <Text style={somaDespesas > 200 && styles.valorAlto}>
-        R$ {somaDespesas.toFixed(2)}
+      <Text style={sumExpenses > 200 && styles.highValue}>
+        R$ {sumExpenses.toFixed(2)}
       </Text>
     </View>
   );
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     alignContent: "left",
   },
-  valorAlto: {
+  highValue: {
     color: "red",
   },
 });
