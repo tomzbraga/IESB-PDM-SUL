@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useExpenses } from "../store/expenses-context";
 
 const CATEGORIES = ["Alimentação", "Transporte", "Lazer", "Contas"];
 
@@ -9,6 +10,8 @@ export default function GerenciarDespesa({ navigation }) {
   const [price, setPrice] = useState("");
   const [data, setDate] = useState(new Date());
   const [category, setCategory] = useState("");
+
+  const { addExpense } = useExpenses();
 
   const [showPicker, setShowPicker] = useState(false);
   const onChange = (e, selectedDate) => {
@@ -30,12 +33,15 @@ export default function GerenciarDespesa({ navigation }) {
   const validForm =
     description.trim() !== "" && Number(price) > 0 && category !== "";
 
-  const handleSave = () => {
-    if (!validForm) {
-      return;
-    }
+  function handleSave() {
+    addExpense({
+      description: description,
+      amount: parseFloat(price),
+      date: date,
+      category: 'Outros'
+    });
     navigation.goBack();
-  };
+  }
 
   return (
     <View style={styles.container}>

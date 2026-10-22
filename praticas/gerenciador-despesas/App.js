@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { ExpensesContextProvider } from "./store/expenses-context";
 
 import DespesasRecentes from "./screens/DespesasRecentes";
 import TodasDespesas from "./screens/TodasDespesas";
@@ -55,15 +56,17 @@ function BottomTabScreen() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Despesas"
-          component={BottomTabScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="GerenciarDespesa" component={GerenciarDespesa} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ExpensesContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Despesas"
+            component={BottomTabScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="GerenciarDespesa" component={GerenciarDespesa} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ExpensesContextProvider>
   );
 }
