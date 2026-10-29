@@ -1,66 +1,56 @@
-import { useEffect, useState } from 'react';
-import { Button, Image, Pressable, Text, View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { pickImage, takePhoto } from '../../services/media';
-import { styles } from '../../styles/shared';
+import { useEffect, useState } from "react";
+import { View, Text, Image, Pressable, Button, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
+import { pickImage, takePhoto } from "../../services/media";
 
-const PHOTO_KEY = '@profile-photo';
+const CHAVE = "@profile-photo";
 
-/**
- * Aba Perfil: avatar com galeria/câmera e persistência local.
- */
-export default function ProfileScreen() {
-  const [photoUri, setPhotoUri] = useState(null);
-  const avatar = photoUri
-    ? { uri: photoUri }
-    : require('../../assets/icon.png');
+export default function Perfil() {
+  const [foto, setFoto] = useState(null);
 
   useEffect(() => {
-    AsyncStorage.getItem(PHOTO_KEY).then((saved) => {
-      if (saved) setPhotoUri(saved);
-    });
+    async function carregar() {
+      try {
+        const salva = await AsyncStorage.getItem(CHAVE);
+        if (salva) setFoto(salva);
+      } catch (e) {
+        console.log("Erro ao ler a foto:", e.message);
+      }
+    }
+    carregar();
   }, []);
 
-  /**
-   * Persiste a URI da foto escolhida.
-   */
-  async function savePhoto(uri) {
+  async function salvar(uri) {
     if (!uri) return;
-    setPhotoUri(uri);
-    await AsyncStorage.setItem(PHOTO_KEY, uri);
-  }
-
-  /**
-   * Abre a galeria e salva a imagem selecionada.
-   */
-  async function handleChangePhoto() {
-    await savePhoto(await pickImage());
-  }
-
-  /**
-   * Abre a câmera e salva a foto tirada.
-   */
-  async function handleTakePhoto() {
-    await savePhoto(await takePhoto());
+    setFoto(uri);
+    try {
+      await AsyncStorage.setItem(CHAVE, uri);
+    } catch (e) {
+      console.log("Erro ao salvar a foto:", e.message);
+    }
   }
 
   return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Perfil</Text>
-      <Pressable onPress={handleChangePhoto}>
-        <Image source={avatar} style={styles.avatar} />
-        <Text style={styles.name}>Maria Souza</Text>
-        <Text style={[styles.subtitle, { textAlign: 'center' }]}>
-          Engenharia de Software
-        </Text>
+    <View style={styles.tela}>
+      <Pressable onPress={async () => salvar(await pickImage())}>
+        {foto ? (
+          <Image source={{ uri: foto }} style={styles.avatar} />
+        ) : (
+          <View style={[styles.avatar, styles.vazio]}>
+            <Ionicons name="person" size={60} color="#999" />
+          </View>
+        )}
       </Pressable>
 
-      <View style={styles.buttonWrap}>
-        <Button title="Galeria" onPress={handleChangePhoto} />
-      </View>
-      <View style={styles.buttonWrap}>
-        <Button title="Câmera" onPress={handleTakePhoto} />
-      </View>
+      <Text>Toque na foto para escolher da galeria</Text>
+      <Button title="Tirar foto" onPress={async () => salvar(await takePhoto())} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  tela: { flex: 1, justifyContent: "center", alignItems: "center", gap: 16 },
+  avatar: { width: 140, height: 140, borderRadius: 70 },
+  vazio: { backgroundColor: "#e6e8eb", justifyContent: "center", alignItems: "center" },
+});
