@@ -1,17 +1,32 @@
-import { Stack } from "expo-router";
-import { ExpensesContextProvider } from "../store/expenses-context";
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function Layout() {
+const ABAS = [
+  { name: "index", title: "Início", icon: "home" },
+  { name: "tasks", title: "Tarefas", icon: "checkbox" },
+  { name: "wallet", title: "Bolso", icon: "wallet" },
+  { name: "profile", title: "Perfil", icon: "person" },
+];
+
+export default function TabsLayout() {
   return (
-    <ExpensesContextProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="task/[id]" options={{ title: "Tarefa" }} />
-        <Stack.Screen
-          name="new-task"
-          options={{ presentation: "modal", title: "Nova tarefa" }}
+    <Tabs screenOptions={{ tabBarActiveTintColor: "#007AFF" }}>
+      {ABAS.map((aba) => (
+        <Tabs.Screen
+          key={aba.name}
+          name={aba.name}
+          options={{
+            title: aba.title,
+            tabBarIcon: ({ color, size, focused }) => (
+              <Ionicons
+                name={focused ? aba.icon : `${aba.icon}-outline`}
+                size={size}
+                color={color}
+              />
+            ),
+          }}
         />
-      </Stack>
-    </ExpensesContextProvider>
+      ))}
+    </Tabs>
   );
 }
